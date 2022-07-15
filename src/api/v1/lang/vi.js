@@ -8,10 +8,18 @@ export const transValidation = {
   password_require: "Mật khẩu là trường bắt buộc",
   password_empty: "Mật khẩu không được để trống",
   gender_incorrect: "Giới tính phải là: Nam, Nữ, Khác",
+};
+
+export const transError = {
   account_not_active:
     "Tài khoản đã đăng kí nhưng chưa được kích hoạt, vui lòng liên hệ 0339488855 hoặc sử dụng email khác.",
+  account_active_fail: "Không thể kích hoạt tài khoản, vui lòng liên hệ admin",
   server_error: "Đã có lỗi xảy ra, vui long liên hệ admin",
   email_does_not_exist: "Email không tồn tài",
+};
+
+export const transSuccess = {
+  account_active_success: "Kích hoạt tài khoản thành công",
 };
 export const transMail = {
   subject: "Ứng dụng xyz xác nhận kích hoạt tài khoản",

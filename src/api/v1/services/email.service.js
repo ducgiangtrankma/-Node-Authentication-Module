@@ -3,7 +3,7 @@ import nodemailer from "nodemailer";
 import { OAuth2Client } from "google-auth-library";
 import { UserModel } from "../models/user.model";
 import createHttpError from "http-errors";
-import { transValidation } from "../lang/vi";
+import { transError, transValidation } from "../lang/vi";
 
 const myOAuth2Client = new OAuth2Client(
   process.env.GOOGLE_MAILER_CLIENT_ID,
@@ -53,7 +53,7 @@ const sendEmail = async (email, subject, htmlContent, user) => {
     await UserModel.deleteOne({
       _id: user._id,
     });
-    throw createHttpError(500, transValidation.email_does_not_exist);
+    throw createHttpError(500, transError.email_does_not_exist);
   }
 };
 export const emailService = {

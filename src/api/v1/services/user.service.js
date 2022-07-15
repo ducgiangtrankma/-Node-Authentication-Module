@@ -1,7 +1,7 @@
 import { UserModel } from "../models/user.model";
 import bcrypt from "bcrypt";
 import createHttpError from "http-errors";
-import { transMail, transValidation } from "../lang/vi";
+import { transError, transMail, transValidation } from "../lang/vi";
 import { emailService } from "./email.service";
 const salRounds = 7;
 const createUser = async (userBody, protocol, host) => {
@@ -18,8 +18,8 @@ const createUser = async (userBody, protocol, host) => {
     };
     const newUser = await UserModel.create(userItem);
     if (newUser) {
-      const linkActive = `${protocol}://${host}/verify/${newUser.createAt}`;
-      await emailService.sendEmail(
+      const linkActive = `${protocol}://${host}/api/v1/verify/${newUser.createAt}`;
+      emailService.sendEmail(
         email,
         transMail.subject,
         transMail.template(linkActive),
@@ -29,13 +29,30 @@ const createUser = async (userBody, protocol, host) => {
     }
   }
   if (userByEmail && !userByEmail.isActive) {
-    throw createHttpError(422, transValidation.account_not_active);
+    throw createHttpError(422, transError.account_not_active);
   }
   if (userByEmail && userByEmail.isActive) {
     throw createHttpError(422, transValidation.email_in_use);
   }
 };
 
+const verifyAccount = async (code) => {
+  const userByCode = await UserModel.findOne({
+    createAt: code,
+  });
+  if (!userByCode) {
+    throw createHttpError(422, transError.account_active_fail);
+  }
+  return UserModel.findOneAndUpdate(
+    {
+      createAt: code,
+    },
+    {
+      isActive: true,
+    }
+  );
+};
 export const userService = {
   createUser,
+  verifyAccount,
 };
