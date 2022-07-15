@@ -42,7 +42,6 @@ const registerValidate = (req, res, next) => {
       }),
   });
   const { error } = userSchema.validate(req.body);
-  console.log(error);
   if (error) {
     const { details } = error;
     const message = details.map((i) => i.message).join(",");
