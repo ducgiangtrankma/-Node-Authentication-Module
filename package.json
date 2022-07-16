@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --experimental-modules --es-module-specifier-resolution=node server.js"
+    "start": "nodemon --experimental-modules --es-module-specifier-resolution=node server.js",
+    "start-redis": "nodemon --experimental-modules --es-module-specifier-resolution=node eventListenerExpriration.js"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +22,7 @@
     "@types/bcrypt": "^5.0.0",
     "@types/http-errors": "^1.8.2",
     "bcrypt": "^5.0.1",
+    "date-fns": "^2.28.0",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "google-auth-library": "^8.1.1",
@@ -29,6 +31,7 @@
     "joi": "^17.6.0",
     "mongoose": "^6.4.4",
     "nodemailer": "^6.7.7",
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.19",
+    "redis": "^4.2.0"
   }
 }

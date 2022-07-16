@@ -3,6 +3,9 @@ import bcrypt from "bcrypt";
 import createHttpError from "http-errors";
 import { transError, transMail, transValidation } from "../lang/vi";
 import { emailService } from "./email.service";
+import { client } from "../../../config/connection_redis";
+import { logEvents } from "../helpers/logEvents";
+
 const salRounds = 7;
 const createUser = async (userBody, protocol, host) => {
   const { email, password, gender } = userBody;
@@ -25,10 +28,16 @@ const createUser = async (userBody, protocol, host) => {
         transMail.template(linkActive),
         newUser
       );
+      // client.set(newUser._id.toString(), newUser.createAt);
+      // client.expire(
+      //   newUser._id.toString(),
+      //   process.env.EXPIRES_TIME_ACTIVE_ACCOUNT
+      // );
       return newUser;
     }
   }
   if (userByEmail && !userByEmail.isActive) {
+    logEvents(transError.account_not_active);
     throw createHttpError(422, transError.account_not_active);
   }
   if (userByEmail && userByEmail.isActive) {
