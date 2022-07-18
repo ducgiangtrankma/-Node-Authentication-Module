@@ -9,7 +9,7 @@
 ## Khởi chạy dự án
 * Clone project
 ```
-git clone
+git clone https://github.com/ducgiangtrankma/-Node-Authentication-Module.git
 ```
 * Cấu hình file .env theo yêu cầu
 ```
