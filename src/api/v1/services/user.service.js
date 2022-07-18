@@ -28,11 +28,11 @@ const createUser = async (userBody, protocol, host) => {
         transMail.template(linkActive),
         newUser
       );
-      // client.set(newUser._id.toString(), newUser.createAt);
-      // client.expire(
-      //   newUser._id.toString(),
-      //   process.env.EXPIRES_TIME_ACTIVE_ACCOUNT
-      // );
+      client.set(newUser._id.toString(), newUser.createAt);
+      client.expire(
+        newUser._id.toString(),
+        process.env.EXPIRES_TIME_ACTIVE_ACCOUNT
+      );
       return newUser;
     }
   }
