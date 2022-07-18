@@ -10,7 +10,11 @@ const register = catchAsync(async (req, res, next) => {
     req.protocol,
     req.get("host")
   );
-  return res.status(200).json(user);
+  return res.status(200).json({
+    _id: user._id,
+    email: user.email,
+    gender: user.gender,
+  });
 });
 
 const login = catchAsync(async (req, res, next) => {

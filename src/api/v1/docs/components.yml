@@ -1,0 +1,55 @@
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+        gender:
+          type: string
+          enum: ["Male", "Female", "Other"]
+        isActive:
+          type: boolean
+        createAt:
+          type: number
+        updateAt:
+          type: number | null
+        deleteAt:
+          type: number | null
+      example:
+        _id: 62d4e4301ebe8f5c7ee16e2b
+        email: example@gmail.com
+        password: Abc@12345
+        gender: Male
+        isActive: true
+        createAt: 1658119216691
+        updateAt: null
+        deleteAt: null
+    Error:
+      type: object
+      properties:
+        code:
+          type: number
+        message:
+          type: string
+  securitySchemes:
+    bearerAuth:           
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  responses:
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: 401
+            message: Please authenticate
