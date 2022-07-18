@@ -8,7 +8,7 @@ const APP_HOST = process.env.APP_HOST;
 const APP_PORT = process.env.APP_PORT;
 
 connect_mongodb();
-// connect_redis();
+connect_redis();
 
 // const subscriber = client.duplicate();
 

@@ -14,9 +14,8 @@ app.use(routes);
 
 //Cổng handle lỗi
 app.use((error, req, res, next) => {
-  res.status(error.status).send({
-    message: error.message,
-  });
+  console.log("App error", error);
+  res.status(error.status).send(error);
 });
 
 export default app;

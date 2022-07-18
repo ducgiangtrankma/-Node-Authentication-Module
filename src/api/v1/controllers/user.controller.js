@@ -9,7 +9,13 @@ const verifyAccount = catchAsync(async (req, res, next) => {
     return res.status(200).send(transSuccess.account_active_success);
   }
 });
-
+const getListUser = catchAsync(async (req, res, next) => {
+  const users = await userService.getListUser();
+  res.json({
+    listUsers: users,
+  });
+});
 export const userController = {
   verifyAccount,
+  getListUser,
 };

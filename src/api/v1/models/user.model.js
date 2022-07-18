@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 const Schema = mongoose.Schema;
 const UserSchema = new Schema(
   {
@@ -22,5 +23,12 @@ const UserSchema = new Schema(
     collection: "users",
   }
 );
+UserSchema.methods.isCheckPassword = async function (password) {
+  try {
+    return await bcrypt.compare(password, this.password);
+  } catch (error) {
+    console.log("Error", error);
+  }
+};
 const UserModel = mongoose.model("user", UserSchema);
 export { UserModel };

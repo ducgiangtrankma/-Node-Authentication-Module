@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { transValidation } from "../lang/vi";
+import { transError, transValidation } from "../lang/vi";
 const password = (value, helpers) => {
   if (value.length < 8) {
     return helpers.message(transValidation.password_incorrect);
@@ -52,7 +52,29 @@ const registerValidate = (req, res, next) => {
   }
   next();
 };
-
+const loginValidate = (req, res, next) => {
+  const userSchema = Joi.object({
+    email: Joi.string().required().messages({
+      "any.required": transError.error_input,
+      "string.empty": transValidation.email_empty,
+    }),
+    password: Joi.string().required().messages({
+      "any.required": transError.error_input,
+      "string.empty": transValidation.password_empty,
+    }),
+  });
+  const { error } = userSchema.validate(req.body);
+  if (error) {
+    const { details } = error;
+    const message = details.map((i) => i.message).join(",");
+    next({
+      status: 422,
+      message,
+    });
+  }
+  next();
+};
 export const authValid = {
   registerValidate,
+  loginValidate,
 };

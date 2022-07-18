@@ -61,7 +61,16 @@ const verifyAccount = async (code) => {
     }
   );
 };
+
+const getListUser = async () => {
+  const users = UserModel.find({
+    isActive: true,
+  }).select(["_id", "email", "gender", "createAt"]);
+  return users;
+};
+
 export const userService = {
   createUser,
   verifyAccount,
+  getListUser,
 };

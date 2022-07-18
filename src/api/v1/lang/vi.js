@@ -16,10 +16,13 @@ export const transError = {
   account_active_fail: "Không thể kích hoạt tài khoản, vui lòng liên hệ admin",
   server_error: "Đã có lỗi xảy ra, vui long liên hệ admin",
   email_does_not_exist: "Email không tồn tài",
+  error_input: "Bạn cần nhập đủ các trường dữ liệu",
+  email_password_incorrect: "Tài khoản hoặc mật khẩu không chính xác",
 };
 
 export const transSuccess = {
   account_active_success: "Kích hoạt tài khoản thành công",
+  logout_success: "Đăng xuất thành công",
 };
 export const transMail = {
   subject: "Ứng dụng xyz xác nhận kích hoạt tài khoản",
